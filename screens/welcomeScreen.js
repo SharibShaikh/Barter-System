@@ -1,18 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Alert,
-  Image,
-  ScrollView,
-  KeyboardAvoidingView,
-  Modal,
-} from "react-native";
-
-//Importing The Firebase 
+import { TouchableOpacity, StyleSheet, Text, View, TextInput, Alert, Image, ScrollView, KeyboardAvoidingView, Modal, } from "react-native";
 import db from '../config'
 import firebase from "firebase";
 
@@ -59,7 +46,7 @@ export default class WelcomeScreen extends React.Component {
         .createUserWithEmailAndPassword(emailId, password)
         .then(() => {
           db.collection('users').add({
-            username: emailId,
+
             first_name: firstName,
             last_name: lastName,
             contact: mobileNo,
@@ -257,7 +244,7 @@ export default class WelcomeScreen extends React.Component {
         {/* Title Image For The App */}
 
         <Image
-          source={require("../assets/barter3.png")}
+          source={require("../assets/AppIcon.png")}
           style={{ width: 250, height: 250, marginTop: -100, justifyContent: 'center', alignContent: 'center' }}
         />
 
@@ -267,7 +254,7 @@ export default class WelcomeScreen extends React.Component {
 
 
         {/*Creating The Text Input For Entering The "Email ID" for Login */}
-<Text style = {{fontWeight:'bold',marginRight:210}}>USERNAME</Text>
+        <Text style={{ fontWeight: 'bold', marginRight: 210 }}>USERNAME</Text>
         <TextInput
           style={styles.loginTextInput}
           placeholder="Enter Your Email ID"
@@ -280,7 +267,7 @@ export default class WelcomeScreen extends React.Component {
         />
 
         {/*Creating The Text Input For Entering The "Password" for Login */}
-        <Text style = {{fontWeight:'bold',marginRight:210}}>PASSWORD</Text>
+        <Text style={{ fontWeight: 'bold', marginRight: 210 }}>PASSWORD</Text>
         <TextInput
           style={styles.loginTextInput}
           placeholder="Enter Your Password"

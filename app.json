@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Book-Santa",
-    "slug": "Book-Santa",
+    "name": "Barter",
+    "slug": "Barter",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Image.png",
+    "icon": "./assets/AppIcon1.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/AppIcon1",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.sharibshaikh.BookSanta"

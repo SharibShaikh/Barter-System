@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { ListItem } from 'react-native-elements'
-import firebase from 'firebase';
 import db from '../config'
+
 import MyHeader from '../components/MyHeader';
 
-export default class exchangerequests extends Component {
+export default class HomeScreen extends Component {
   constructor() {
     super()
     this.state = {
@@ -15,7 +15,7 @@ export default class exchangerequests extends Component {
   }
 
   getRequestedBooksList = () => {
-    this.requestRef = db.collection("book_requests")
+    this.requestRef = db.collection("exchange_requests")
       .onSnapshot((snapshot) => {
         var requestedBooksList = snapshot.docs.map(document => document.data());
         this.setState({
@@ -39,8 +39,8 @@ export default class exchangerequests extends Component {
     return (
       <ListItem
         key={i}
-        title={item.book_name}
-        subtitle={item.reason_to_request}
+        title={item.item_name}
+        subtitle={item.product_description}
         titleStyle={{ color: "black", fontWeight: "bold" }}
         rightElement={
           <TouchableOpacity style={styles.button}
@@ -60,7 +60,7 @@ export default class exchangerequests extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <MyHeader title="Exchange Requests" navigation ={this.props.navigation}/>
+        <MyHeader title="Exchange Requests" navigation={this.props.navigation} />
         <View style={{ flex: 1 }}>
           {
             this.state.requestedBooksList.length === 0
@@ -69,7 +69,7 @@ export default class exchangerequests extends Component {
                   <Text style={{ fontSize: 15 }}>List Of All Requested Books Will Appear Here</Text>
                 </View>
               )
-              : ( 
+              : (
                 <FlatList
                   keyExtractor={this.keyExtractor}
                   data={this.state.requestedBooksList}

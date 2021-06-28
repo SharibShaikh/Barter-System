@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Header, Icon, Badge } from 'react-native-elements';
 import { View, Text, StyeSheet, Alert } from 'react-native';
-import firebase from 'firebase';
 import db from '../config'
-import NotificationScreen from '../screens/notificationscreen';
 
+import NotificationScreen from '../screens/notificationscreen';
 
 export default class MyHeader extends Component {
   constructor(props) {
@@ -30,13 +29,13 @@ export default class MyHeader extends Component {
   BellIcon = () => {
     return (
       <View>
-         <Icon name='bell' 
-         type='font-awesome' 
-         color='white' size={25}
-         onPress={() =>this.props.navigation.navigate('Notifications')}/>
+        <Icon name='bell'
+          type='font-awesome'
+          color='white' size={25}
+          onPress={() => this.props.navigation.navigate('Notifications')} />
         <Badge
-        value={this.state.value}
-        containerStyle={{ position: "absolute", top: -4, right: -4 }} />
+          value={this.state.value}
+          containerStyle={{ position: "absolute", top: -4, right: -4 }} />
 
       </View>
 
@@ -46,17 +45,17 @@ export default class MyHeader extends Component {
 
   render() {
     return (
-      <Header containerStyle={{ 
+      <Header containerStyle={{
         backgroundColor: '#0e5da2'
-       }}
-      
+      }}
 
-          leftComponent={<Icon 
-          name='bars' 
-          type='font-awesome' 
-          color='white'  
+
+        leftComponent={<Icon
+          name='bars'
+          type='font-awesome'
+          color='white'
           onPress={() => this.props.navigation.toggleDrawer()}
-          />}
+        />}
 
         centerComponent={{
           text: this.props.title,
@@ -65,10 +64,11 @@ export default class MyHeader extends Component {
             fontSize: 20,
             fontWeight: "bold",
             justifyContent: 'center',
-            alignItems: 'center'}
+            alignItems: 'center'
+          }
         }}
 
-        rightComponent={<this.BellIcon {...this.props}/>
+        rightComponent={<this.BellIcon {...this.props} />
         }
 
 

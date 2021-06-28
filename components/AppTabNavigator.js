@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-//import exchangerequests from "../screens/exchangerequests";
-import BookRequestScreen from "../screens/RequestsScreen";
+import HomeScreen from "../screens/homescreen";
+import AddItemRequestScreen from "../screens/addItemrequestscreen";
 import { AppStackNavigator } from "./AppStackNavigator";
 
 export const AppTabNavigator = createBottomTabNavigator({
@@ -18,8 +18,8 @@ export const AppTabNavigator = createBottomTabNavigator({
       tabBarLabel: "Home",
     },
   },
-  BookRequest: {
-    screen: BookRequestScreen,
+  ExchangeRequest: {
+    screen: AddItemRequestScreen,
     navigationOptions: {
       tabBarIcon: (
         <Image

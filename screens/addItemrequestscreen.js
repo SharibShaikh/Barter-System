@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import MyHeader from "../components/MyHeader";
-import db from "../config";
-import firebase from "firebase";
 import { KeyboardAvoidingView, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Alert } from "react-native";
+import firebase from "firebase";
+import db from "../config";
 
-export default class BookRequestScreen extends React.Component {
+import MyHeader from "../components/MyHeader";
+
+export default class AddItemRequestScreen extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -23,11 +24,11 @@ export default class BookRequestScreen extends React.Component {
   addRequest = (bookName, reasonToRequest) => {
     var userId = this.state.userId;
     var requestId = this.createUniqueId();
-    db.collection("book_requests").add({
+    db.collection("exchange_requests").add({
       user_id: userId,
-      book_name: bookName,
-      reason_to_request: reasonToRequest,
-      request_id: requestId,
+      item_name: bookName,
+      product_description: reasonToRequest,
+      barter_id: requestId,
     });
 
     this.setState({
@@ -35,15 +36,15 @@ export default class BookRequestScreen extends React.Component {
       reasonToRequest: "",
     });
 
-    return Alert.alert("Book Request Submitted Successfully");
+    return Alert.alert("Exchange Request Submitted Successfully");
   };
 
   render() {
     return (
-      
+
       <View style={styles.container}>
-       
-       <MyHeader title="Request Exchange" />
+
+        <MyHeader title="Request Exchange" />
         <KeyboardAvoidingView style={styles.keyBoardStyle}>
           <TextInput
             style={styles.formtextinput}
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
     alignItems: "center",
-    alignSelf:"center",
+    alignSelf: "center",
     justifyContent: "center",
     borderWidth: 1,
     borderRadius: 10,
@@ -127,9 +128,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
-  keyBoardStyle:{
-    flex:0.8,
-    justifyContent:'center',
-    
+  keyBoardStyle: {
+    flex: 0.8,
+    justifyContent: 'center',
+
   }
 });

@@ -1,12 +1,12 @@
 import * as firebase from 'firebase';
 require('@firebase/firestore');
 var firebaseConfig = {
-  apiKey: "AIzaSyANhbRogUt47LNTnJYYD6uxY5L56Ub12w4",
-  authDomain: "class76booksanta.firebaseapp.com",
-  projectId: "class76booksanta",
-  storageBucket: "class76booksanta.appspot.com",
-  messagingSenderId: "880728690415",
-  appId: "1:880728690415:web:bfa5686394dd577794951a"
+  apiKey: "AIzaSyA1kelyKuj6AhKRo6C8lwoLzp2FYfUgBgE",
+  authDomain: "project76-barter-system-app.firebaseapp.com",
+  projectId: "project76-barter-system-app",
+  storageBucket: "project76-barter-system-app.appspot.com",
+  messagingSenderId: "368273858022",
+  appId: "1:368273858022:web:1e2b95d98d279ad5c68a27"
 };
   // Initialize Firebase
 //  if(!firebase.apps.length){

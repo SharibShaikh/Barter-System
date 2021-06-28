@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { DrawerItems } from 'react-navigation-drawer';
-import firebase from 'firebase'
 import { TouchableOpacity } from 'react-native';
+import firebase from 'firebase'
 
 export default class customSideBarMenu extends React.Component {
 

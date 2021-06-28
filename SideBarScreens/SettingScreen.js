@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TextInput,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Alert
-} from 'react-native';
-import MyHeader from '../components/MyHeader'
-import db from '../config'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import firebase from 'firebase'
+import db from '../config'
+
+import MyHeader from '../components/MyHeader'
 
 export default class SettingScreen extends Component {
   constructor() {
@@ -57,7 +49,7 @@ export default class SettingScreen extends Component {
 
   }
 
-  componentDidMount=()=> {
+  componentDidMount = () => {
     this.getUserDetails()
   }
 
@@ -66,9 +58,9 @@ export default class SettingScreen extends Component {
     return (
       <View style={styles.container} >
         <MyHeader title="Settings" navigation={this.props.navigation} />
-        
+
         <View style={styles.formContainer}>
-        <Text style= {{marginRight:240,marginTop:30,fontWeight:'bold'}}>First Name</Text>
+          <Text style={{ marginRight: 240, marginTop: 30, fontWeight: 'bold' }}>First Name</Text>
           <TextInput
             style={styles.formTextInput}
             placeholder={"First Name"}
@@ -80,7 +72,7 @@ export default class SettingScreen extends Component {
             }}
             value={this.state.firstName}
           />
-          <Text style= {{marginRight:240,marginTop:15,fontWeight:'bold'}}>Last Name</Text>
+          <Text style={{ marginRight: 240, marginTop: 15, fontWeight: 'bold' }}>Last Name</Text>
           <TextInput
             style={styles.formTextInput}
             placeholder={"Last Name"}
@@ -92,7 +84,7 @@ export default class SettingScreen extends Component {
             }}
             value={this.state.lastName}
           />
-          <Text style= {{marginRight:240,marginTop:15,fontWeight:'bold'}}>Contact No.</Text>
+          <Text style={{ marginRight: 240, marginTop: 15, fontWeight: 'bold' }}>Contact No.</Text>
           <TextInput
             style={styles.formTextInput}
             placeholder={"Contact"}
@@ -105,7 +97,7 @@ export default class SettingScreen extends Component {
             }}
             value={this.state.contact}
           />
-          <Text style= {{marginRight:260,marginTop:15,fontWeight:'bold'}}>Address</Text>
+          <Text style={{ marginRight: 260, marginTop: 15, fontWeight: 'bold' }}>Address</Text>
           <TextInput
             style={styles.formTextInput}
             placeholder={"Address"}
@@ -152,16 +144,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: '#0e5da2',
     borderRadius: 10,
-    borderWidth: 1.5,
+    borderWidth: 1,
     marginTop: 20,
     padding: 10,
+    
   },
   button: {
-    
-    width: "50%",
-    height: 40,
+    width: 200,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     borderRadius: 10,
     backgroundColor: "#0e5da2",
     shadowColor: "#000",
