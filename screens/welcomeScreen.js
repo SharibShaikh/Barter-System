@@ -36,30 +36,37 @@ export default class WelcomeScreen extends React.Component {
       });
   };
 
-  //Registration Function
-  userSignUp = (emailId, password, confirmPassword) => {
-    if (password !== confirmPassword) {
-      return Alert.alert("Passwords Do Not Match");
-    } else {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(emailId, password)
-        .then(() => {
-          db.collection('users').add({
-
-            first_name: firstName,
-            last_name: lastName,
-            contact: mobileNo,
-            address: address
-          })
+ //Registration Function
+ userSignUp = (emailId, password, confirmPassword) => {
+  if (password !== confirmPassword) {
+    return Alert.alert("Passwords Do Not Match");
+  } else {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(emailId, password)
+      .then(() => 
+      {
+        db.collection('users').add({
+          first_name: this.state.firstName,
+          last_name: this.state.lastName,
+          contact: this.state.mobileNo,
+          address: this.state.address,
+          username:this.state.emailId
         })
-        .catch((error) => {
-          var errorcode = error.code;
-          var errormessage = error.message;
-          return Alert.alert(errormessage);
-        });
-    }
-  };
+        return Alert.alert("User Added Successfully", "", [
+          {
+            text: "OK",
+            onPress: () => this.setState({ isModalVisible: false })
+          }
+        ]);
+      })
+      .catch((error) => {
+        var errorcode = error.code;
+        var errormessage = error.message;
+        return Alert.alert(errormessage);
+      });
+  }
+};
 
   //Creating The "showmodal" Function"
   showmodal = () => {

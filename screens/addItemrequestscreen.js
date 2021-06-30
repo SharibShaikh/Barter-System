@@ -12,7 +12,7 @@ export default class AddItemRequestScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      bookName: "",
+      itemName: "",
       reasonToRequest: "",
       userId: firebase.auth().currentUser.email,
     };
@@ -21,18 +21,18 @@ export default class AddItemRequestScreen extends React.Component {
     return Math.random().toString(36).substring(7);
   }
 
-  addRequest = (bookName, reasonToRequest) => {
+  addRequest = (itemName, reasonToRequest) => {
     var userId = this.state.userId;
     var requestId = this.createUniqueId();
     db.collection("exchange_requests").add({
       user_id: userId,
-      item_name: bookName,
+      item_name: itemName,
       product_description: reasonToRequest,
       barter_id: requestId,
     });
 
     this.setState({
-      bookName: "",
+      itemName: "",
       reasonToRequest: "",
     });
 
@@ -51,10 +51,10 @@ export default class AddItemRequestScreen extends React.Component {
             placeholder="Name Of Item"
             onChangeText={(text) => {
               this.setState({
-                bookName: text,
+                itemName: text,
               });
             }}
-            value={this.state.bookName}
+            value={this.state.itemName}
           />
 
           <TextInput
@@ -73,7 +73,7 @@ export default class AddItemRequestScreen extends React.Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.addRequest(this.state.bookName, this.state.reasonToRequest);
+              this.addRequest(this.state.itemName, this.state.reasonToRequest);
             }}
           >
             <Text style={styles.requesttext}>Request Exchange</Text>

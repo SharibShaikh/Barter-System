@@ -12,7 +12,7 @@ export default class MyBarterscreen extends Component {
     this.state = {
       donorId: firebase.auth().currentUser.email,
       donorName: "",
-      allDonations: []
+      allBarters: []
     }
     this.requestRef = null
   }
@@ -30,41 +30,41 @@ export default class MyBarterscreen extends Component {
       })
   }
 
-  getAllDonations = () => {
-    this.requestRef = db.collection("all_donations").where("donor_id", '==', this.state.donorId)
+  getallBarters = () => {
+    this.requestRef = db.collection("all_barters").where("donor_id", '==', this.state.donorId)
       .onSnapshot((snapshot) => {
-        var allDonations = []
+        var allBarters = []
         snapshot.docs.map((doc) => {
-          var donation = doc.data()
-          donation["doc_id"] = doc.id
-          allDonations.push(donation)
+          var barter = doc.data()
+          barter["doc_id"] = doc.id
+          allBarters.push(barter)
         });
         this.setState({
-          allDonations: allDonations
+          allBarters: allBarters
         });
       })
   }
 
-  sendBook = (bookDetails) => {
-    if (bookDetails.request_status === "Item Sent") {
+  sendItem = (itemDetails) => {
+    if (itemDetails.request_status === "Item Sent") {
       var requestStatus = "Donor Interested"
-      db.collection("all_donations").doc(bookDetails.doc_id).update({
+      db.collection("all_barters").doc(itemDetails.doc_id).update({
         "request_status": "Donor Interested"
       })
-      this.sendNotification(bookDetails, requestStatus)
+      this.sendNotification(itemDetails, requestStatus)
     }
     else {
       var requestStatus = "Item Sent"
-      db.collection("all_donations").doc(bookDetails.doc_id).update({
+      db.collection("all_barters").doc(itemDetails.doc_id).update({
         "request_status": "Item Sent"
       })
-      this.sendNotification(bookDetails, requestStatus)
+      this.sendNotification(itemDetails, requestStatus)
     }
   }
 
-  sendNotification = (bookDetails, requestStatus) => {
-    var requestId = bookDetails.barter_id
-    var donorId = bookDetails.donor_id
+  sendNotification = (itemDetails, requestStatus) => {
+    var requestId = itemDetails.barter_id
+    var donorId = itemDetails.donor_id
     db.collection("all_notifications")
       .where("barter_id", "==", requestId)
       .where("donor_id", "==", donorId)
@@ -73,9 +73,9 @@ export default class MyBarterscreen extends Component {
         snapshot.forEach((doc) => {
           var message = ""
           if (requestStatus === "Item Sent") {
-            message = this.state.donorName + " sent you book"
+            message = this.state.donorName + " Sent You An Item"
           } else {
-            message = this.state.donorName + " has shown interest in donating the book"
+            message = this.state.donorName + " Has Shown Interest In Exchanging The Item"
           }
           db.collection("all_notifications").doc(doc.id).update({
             "message": message,
@@ -104,7 +104,7 @@ export default class MyBarterscreen extends Component {
             }
           ]}
           onPress={() => {
-            this.sendBook(item)
+            this.sendItem(item)
           }}
         >
           <Text style={{ color: '#ffff' }}>{
@@ -119,7 +119,7 @@ export default class MyBarterscreen extends Component {
 
   componentDidMount() {
     this.getDonorDetails(this.state.donorId)
-    this.getAllDonations()
+    this.getallBarters()
   }
 
   componentWillUnmount() {
@@ -132,7 +132,7 @@ export default class MyBarterscreen extends Component {
         <MyHeader navigation={this.props.navigation} title="My Barters" />
         <View style={{ flex: 1 }}>
           {
-            this.state.allDonations.length === 0
+            this.state.allBarters.length === 0
               ? (
                 <View style={styles.subtitle}>
                   <Text style={{ fontSize: 20 }}>List of all Barters Done Will Appear Here </Text>
@@ -141,7 +141,7 @@ export default class MyBarterscreen extends Component {
               : (
                 <FlatList
                   keyExtractor={this.keyExtractor}
-                  data={this.state.allDonations}
+                  data={this.state.allBarters}
                   renderItem={this.renderItem}
                 />
               )

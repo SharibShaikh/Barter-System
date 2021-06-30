@@ -18,22 +18,22 @@ export default class SettingScreen extends Component {
     }
   }
 
-  getUserDetails = () => {
+  getUserDetails=()=>{
     var email = firebase.auth().currentUser.email;
-    db.collection('users').where('username', '==', email).get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          var data = doc.data()
-          this.setState({
-            emailId: data.email_id,
-            firstName: data.first_name,
-            lastName: data.last_name,
-            address: data.address,
-            contact: data.mobile_no,
-            docId: doc.id
-          })
-        });
-      })
+    db.collection('users').where('username','==',email).get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+      var data = doc.data()
+        this.setState({
+          emailId   : data.email_id,
+          firstName : data.first_name,
+          lastName  : data.last_name,
+          address   : data.address,
+          contact   : data.contact,
+          docId     : doc.id
+        })
+      });
+    })
   }
 
   updateUserDetails = () => {
@@ -117,7 +117,7 @@ export default class SettingScreen extends Component {
             onPress={() => {
               this.updateUserDetails()
             }}>
-            <Text style={styles.buttonText}>Save</Text>
+            <Text style={styles.buttonText}>Update My Details</Text>
           </TouchableOpacity>
 
         </View>
@@ -150,8 +150,8 @@ const styles = StyleSheet.create({
     
   },
   button: {
-    width: 200,
-    height: 50,
+    width: 230,
+    height: 45,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     color: "#fff"
   }

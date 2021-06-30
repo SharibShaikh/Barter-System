@@ -9,24 +9,24 @@ export default class HomeScreen extends Component {
   constructor() {
     super()
     this.state = {
-      requestedBooksList: []
+      requestedItemsList: []
     }
     this.requestRef = null
   }
 
-  getRequestedBooksList = () => {
+  getrequestedItemsList = () => {
     this.requestRef = db.collection("exchange_requests")
       .onSnapshot((snapshot) => {
-        var requestedBooksList = snapshot.docs.map(document => document.data());
+        var requestedItemsList = snapshot.docs.map(document => document.data());
         this.setState({
-          requestedBooksList: requestedBooksList
+          requestedItemsList: requestedItemsList
         });
 
       })
   }
 
   componentDidMount() {
-    this.getRequestedBooksList()
+    this.getrequestedItemsList()
   }
 
   componentWillUnmount() {
@@ -63,16 +63,16 @@ export default class HomeScreen extends Component {
         <MyHeader title="Exchange Requests" navigation={this.props.navigation} />
         <View style={{ flex: 1 }}>
           {
-            this.state.requestedBooksList.length === 0
+            this.state.requestedItemsList.length === 0
               ? (
                 <View style={styles.subContainer}>
-                  <Text style={{ fontSize: 15 }}>List Of All Requested Books Will Appear Here</Text>
+                  <Text style={{ fontSize: 15 }}>List Of All Requested Items Will Appear Here</Text>
                 </View>
               )
               : (
                 <FlatList
                   keyExtractor={this.keyExtractor}
-                  data={this.state.requestedBooksList}
+                  data={this.state.requestedItemsList}
                   renderItem={this.renderItem}
                 />
               )

@@ -12,7 +12,7 @@ export default class RecieverDetailsScreen extends Component {
       userName: "",
       recieverId: this.props.navigation.getParam('details')["user_id"],
       requestId: this.props.navigation.getParam('details')["barter_id"],
-      bookName: this.props.navigation.getParam('details')["item_name"],
+      itemName: this.props.navigation.getParam('details')["item_name"],
       reason_for_requesting: this.props.navigation.getParam('details')["product_description"],
       recieverName: '',
       recieverContact: '',
@@ -35,7 +35,7 @@ export default class RecieverDetailsScreen extends Component {
         })
       });
 
-    db.collection('requested_books').where('barter_id', '==', this.state.requestId).get()
+    db.collection('requested_barters').where('barter_id', '==', this.state.requestId).get()
       .then(snapshot => {
         snapshot.forEach(doc => {
           this.setState({ recieverRequestDocId: doc.id })
@@ -56,23 +56,23 @@ export default class RecieverDetailsScreen extends Component {
   }
 
   updateBarterStatus = () => {
-    db.collection('all_donations').add({
-      "item_name": this.state.bookName,
+    db.collection('all_barters').add({
+      "item_name": this.state.itemName,
       "barter_id": this.state.requestId,
       "requested_by": this.state.recieverName,
       "donor_id": this.state.userId,
-      "request_status": "Donor Interested"
+      "request_status": "User Intrested"
     })
   }
 
 
   addNotification = () => {
-    var message = this.state.userName + " has shown interest in donating the book"
+    var message = this.state.userName + " Has Shown Interest In Exchanging The Item"
     db.collection("all_notifications").add({
       "targeted_user_id": this.state.recieverId,
       "donor_id": this.state.userId,
       "barter_id": this.state.requestId,
-      "item_name": this.state.bookName,
+      "item_name": this.state.itemName,
       "date": firebase.firestore.FieldValue.serverTimestamp(),
       "notification_status": "unread",
       "message": message
@@ -93,7 +93,7 @@ export default class RecieverDetailsScreen extends Component {
         <View style={{ flex: 0.1 }}>
           <Header
             leftComponent={<Icon name='arrow-left' type='feather' color='white' onPress={() => this.props.navigation.goBack()} />}
-            centerComponent={{ text: "Exchange Requests", style: { color: 'white', fontSize: 20, fontWeight: "bold", } }}
+            centerComponent={{ text: "Details", style: { color: 'white', fontSize: 20, fontWeight: "bold", } }}
             backgroundColor="#0e5da2"
           />
         </View>
@@ -103,7 +103,7 @@ export default class RecieverDetailsScreen extends Component {
             titleStyle={{ fontSize: 20 }}
           >
             <Card >
-              <Text style={{ fontWeight: 'bold' }}>Name : {this.state.bookName}</Text>
+              <Text style={{ fontWeight: 'bold' }}>Name : {this.state.itemName}</Text>
             </Card>
             <Card>
               <Text style={{ fontWeight: 'bold' }}>Description : {this.state.reason_for_requesting}</Text>
@@ -137,7 +137,7 @@ export default class RecieverDetailsScreen extends Component {
                     this.addNotification()
                     this.props.navigation.navigate('MyBarters')
                   }}>
-                <Text>I Want To Exchange</Text>
+                <Text style = {{color:'white',fontSize:15}}>I Want To Exchange</Text>
               </TouchableOpacity>
             )
             : null
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: 'orange',
+    backgroundColor: '#0e5da2',
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
